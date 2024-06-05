@@ -4,14 +4,16 @@
             <h1>My Friends</h1>
         </header>
         <ul>
-            <li></li>
-            <friend-contact></friend-contact>
-            <friend-contact></friend-contact>
-            <friend-contact></friend-contact>
-            <friend-contact></friend-contact>
+            <li></li> 
+            <friend-contact name="Man Lan" phone-number='000 000 0000' email-address="m1@gmail.com"></friend-contact>
+            <friend-contact name="Man Ban" ></friend-contact>
+            <friend-contact name="Man Can" phone-number='000 000 2222' email-address="m3@gmail.com"></friend-contact>
+            <friend-contact name="Man Dan" phone-number='000 000 3333' email-address="m4@gmail.com"></friend-contact>
         </ul>
     </section>
 </template>
+
+<!-- props should not be mutated. That means data passed from parent to child should only be changed in parent. Because Vue uses unidirectional flow-->
 
 <script>
 import FriendContact from './components/FriendContact.vue';
