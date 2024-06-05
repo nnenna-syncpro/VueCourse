@@ -5,13 +5,19 @@
         </header>
         <ul>
             <li></li>
+            <friend-contact></friend-contact>
+            <friend-contact></friend-contact>
+            <friend-contact></friend-contact>
+            <friend-contact></friend-contact>
         </ul>
     </section>
 </template>
 
 <script>
+import FriendContact from './components/FriendContact.vue';
     //cannot export a const it has to be a default export
     export default {
+  components: { FriendContact },
         // this is the config object is meant for the config object in main.js file
         data () {
             return {
