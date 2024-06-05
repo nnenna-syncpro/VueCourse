@@ -5,8 +5,8 @@
         </header>
         <ul>
             <li></li> 
-            <friend-contact name="Man Lan" phone-number='000 000 0000' email-address="m1@gmail.com"></friend-contact>
-            <friend-contact name="Man Ban" ></friend-contact>
+            <friend-contact name="Man Lan" phone-number='000 000 0000' email-address="m1@gmail.com" isFavorite="1"></friend-contact>
+            <friend-contact name="Man Ban" isFavorite="0" phone-number='000 000 1111' email-address="m2@gmail.com"></friend-contact>
             <friend-contact name="Man Can" phone-number='000 000 2222' email-address="m3@gmail.com"></friend-contact>
             <friend-contact name="Man Dan" phone-number='000 000 3333' email-address="m4@gmail.com"></friend-contact>
         </ul>
@@ -14,7 +14,7 @@
 </template>
 
 <!-- props should not be mutated. That means data passed from parent to child should only be changed in parent. Because Vue uses unidirectional flow-->
-
+<!-- you can still toggle fave without passing it as an attribute. -->
 <script>
 import FriendContact from './components/FriendContact.vue';
     //cannot export a const it has to be a default export
