@@ -7,7 +7,7 @@
         <ul>
             <li></li>
             <friend-contact v-for="friend in friends" :key="friend.id" :id="friend.id" :name="friend.name" :phone-number='friend.phone' :email-address="friend.email"
-                :isFavorite="friend.isFavorite" @toggle-favorite="toggleFavoriteStatus"></friend-contact>
+                :isFavorite="friend.isFavorite" @toggle-favorite="toggleFavoriteStatus" @delete="deleteContact"></friend-contact>
             <!-- <friend-contact name="Man Ban" isFavorite="0" phone-number='000 000 1111'
                 email-address="m2@gmail.com"></friend-contact>
             <friend-contact name="Man Can" phone-number='000 000 2222' email-address="m3@gmail.com"></friend-contact>
@@ -64,6 +64,11 @@ export default {
                 isFavorite: false
             };
             this.friends.push(newFriendContact);
+        },
+        deleteContact(friendId){
+           //overwrite array and assign new property to variable holding array. By filtering out what you dont want from the old array
+           this.friends = this.friends.filter(friend => friend.id !== friendId);
+           //Vue would detect this change in friends property, then re-render list in template and update UI appropriately
         }
     }
 };

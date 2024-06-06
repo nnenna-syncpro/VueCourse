@@ -7,6 +7,8 @@
             <li><strong>Phone:</strong>{{ phoneNumber }}</li>
             <li><strong>Email:</strong>{{ emailAddress }}</li>
         </ul>
+        <button @click="$emit('delete', id)">Delete</button>
+        <!-- when binding an event you can either: point to a method, execute a method, execute any other basic JS code -->
     </li>
 </template>
 
@@ -55,17 +57,18 @@
                 default: false
             }
         },
-        emits: {
-            "toggle-favorite": function(id) {
-                //a function that receives the data you would eventually emit as a parameter. Also validate that data that is part of the emit is not forgotten
-                if (id){
-                    return true;
-                } else {
-                    console.warn("Id is missing")
-                    return false;
-                }
-            }
-        },
+        // emits: {
+        //     "toggle-favorite": function(id) {
+        //         //a function that receives the data you would eventually emit as a parameter. Also validate that data that is part of the emit is not forgotten
+        //         if (id){
+        //             return true;
+        //         } else {
+        //             console.warn("Id is missing")
+        //             return false;
+        //         }
+        //     }
+        // },
+        emits: ["toggle-favorite", "delete"],
         data () {
             return {
                 detailsAreVisible: false,
@@ -109,6 +112,10 @@
                 //adding the prop id makes this available to be emitted
                 //when this event is emitted. it carries this id as an extra data, that would then be provided as a first argument to a method that listens to this event
                 this.$emit("toggle-favorite", this.id);
+            },
+            deleteFriend() {
+                //emit thatuser clicked the delete button
+                this.$emit('delete', this.id)
             }
         }
     }
