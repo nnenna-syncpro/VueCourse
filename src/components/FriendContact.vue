@@ -1,6 +1,6 @@
 <template>
     <li>
-        <h2>{{ name }} {{ friendIsFavorite ? "(Fave)" : ""}}</h2>
+        <h2>{{ name }} {{ isFavorite ? "(Fave)" : ""}}</h2>
         <button @click="toggleDetails">{{detailsAreVisible ? "Hide" : "Show"}} Details</button>
         <button @click="toggleFavorite">Toggle Favorite</button>
         <ul v-if="detailsAreVisible">
@@ -23,6 +23,10 @@
         //     "isFavorite"
         // ],
         props: {
+            id: {
+                type: String,
+                required: true
+            },
             name: {
                 type: String,
                 required: true
@@ -60,8 +64,8 @@
                 //     phone: '000 000 0000',
                 //     email: 'm@gmail.com'
                 // },
-                //soln 2
-                friendIsFavorite: this.isFavorite
+                //soln 2: needed to change data in child but not needed to change data in parent
+                // friendIsFavorite: this.isFavorite
             }
         },
         methods: {
@@ -87,7 +91,13 @@
                 // }
 
                 //using v-for in App.vue
-                this.friendIsFavorite = !this.friendIsFavorite;
+                //this.friendIsFavorite = !this.friendIsFavorite;
+
+                //soln 1: emit an event for parent to listen to 
+                //used on this keyword. Always use kebap case
+                //adding the prop id makes this available to be emitted
+                //when this event is emitted. it carries this id as an extra data, that would then be provided as a first argument to a method that listens to this event
+                this.$emit("toggle-favorite", this.id);
             }
         }
     }

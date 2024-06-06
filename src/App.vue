@@ -5,8 +5,8 @@
         </header>
         <ul>
             <li></li>
-            <friend-contact v-for="friend in friends" :key="friend.id" :name="friend.name" :phone-number='friend.phone' :email-address="friend.email"
-                :isFavorite="false"></friend-contact>
+            <friend-contact v-for="friend in friends" :key="friend.id" :id="friend.id" :name="friend.name" :phone-number='friend.phone' :email-address="friend.email"
+                :isFavorite="friend.isFavorite" @toggle-favorite="toggleFavoriteStatus"></friend-contact>
             <!-- <friend-contact name="Man Ban" isFavorite="0" phone-number='000 000 1111'
                 email-address="m2@gmail.com"></friend-contact>
             <friend-contact name="Man Can" phone-number='000 000 2222' email-address="m3@gmail.com"></friend-contact>
@@ -18,6 +18,8 @@
 <!-- props should not be mutated. That means data passed from parent to child should only be changed in parent. Because Vue uses unidirectional flow-->
 <!-- you can still toggle fave without passing it as an attribute. -->
 <!-- To use a boolean value in prop attribute you have to bind the prop/attr, otherwise attr usually return strings. So you have to bind to pas a JS value other than a string -->
+<!-- How to pass data from child to parent? Answer: emit. The child should emit an event to which a parent can listen. We can emit our own custome events inside our vue components-->
+<!-- Listen to emit using @emit and bind it to any JS code that should execute when event is emitted-->
 <script>
 import FriendContact from './components/FriendContact.vue';
 //cannot export a const it has to be a default export
@@ -31,16 +33,26 @@ export default {
                     id: 'manuel',
                     name: "Man lan",
                     phone: '000 000 0000',
-                    email: 'm@gmail.com'
+                    email: 'm@gmail.com',
+                    isFavorite: false
                 },
                 {
                     id: 'Sanuel',
                     name: "San lan",
                     phone: '000 000 1111',
-                    email: 's@gmail.com'
+                    email: 's@gmail.com',
+                    isFavorite: false
                 }
             ]
         };
+    },
+    methods: {
+        toggleFavoriteStatus(friendId) {
+            //this.id from FriendContact.vue is accepted here as a first parameter to help us identify which friend's status we want to change
+            const identifiedFriend = this.friends.find(friend => friend.id === friendId);
+            identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
+            // when data changes vue would detect the change, automatically pass the updated fave status to the component and update the UI
+        }
     }
 };
 </script>
