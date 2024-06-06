@@ -1,6 +1,6 @@
 <template>
     <li>
-        <h2>{{ name }} {{ friendIsFavorite === "1" ? "(Fave)" : ""}}</h2>
+        <h2>{{ name }} {{ friendIsFavorite ? "(Fave)" : ""}}</h2>
         <button @click="toggleDetails">{{detailsAreVisible ? "Hide" : "Show"}} Details</button>
         <button @click="toggleFavorite">Toggle Favorite</button>
         <ul v-if="detailsAreVisible">
@@ -35,25 +35,31 @@
                 type: String,
                 required: true
             },
+            // isFavorite: {
+            //     type: String,
+            //     required: false,
+            //     //default can be a complex function
+            //     default: "0",
+            //     validator: function (value) {
+            //         return value === "1" || value === "0";
+            //     }
+            // }
             isFavorite: {
-                type: String,
+                type: Boolean,
                 required: false,
-                //default can be a complec function
-                default: "0",
-                validator: function (value) {
-                    return value === "1" || value === "0";
-                }
+                //default can be a complex function
+                default: false
             }
         },
         data () {
             return {
                 detailsAreVisible: false,
-                friend: {
-                    id: 'manuel',
-                    name: "Man lan",
-                    phone: '000 000 0000',
-                    email: 'm@gmail.com'
-                },
+                // friend: {
+                //     id: 'manuel',
+                //     name: "Man lan",
+                //     phone: '000 000 0000',
+                //     email: 'm@gmail.com'
+                // },
                 //soln 2
                 friendIsFavorite: this.isFavorite
             }
@@ -73,12 +79,15 @@
                 //Solutions: 1) let the parent know you want to change data, then the parent would change it and pass the data back to the child
                 //2) take data recived from parent as initial value, change data and display it in the child, however, the data in the parent is not changed
                 
-                //soln 2
-                if (this.friendIsFavorite === "1"){
-                    this.friendIsFavorite = '0';
-                }else {
-                    this.friendIsFavorite = "1"
-                }
+                //soln 2 -- toggle fave on props/attr
+                // if (this.friendIsFavorite === "1"){
+                //     this.friendIsFavorite = '0';
+                // }else {
+                //     this.friendIsFavorite = "1"
+                // }
+
+                //using v-for in App.vue
+                this.friendIsFavorite = !this.friendIsFavorite;
             }
         }
     }

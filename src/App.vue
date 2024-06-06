@@ -4,60 +4,63 @@
             <h1>My Friends</h1>
         </header>
         <ul>
-            <li></li> 
-            <friend-contact name="Man Lan" phone-number='000 000 0000' email-address="m1@gmail.com" isFavorite="1"></friend-contact>
-            <friend-contact name="Man Ban" isFavorite="0" phone-number='000 000 1111' email-address="m2@gmail.com"></friend-contact>
+            <li></li>
+            <friend-contact v-for="friend in friends" :key="friend.id" :name="friend.name" :phone-number='friend.phone' :email-address="friend.email"
+                :isFavorite="false"></friend-contact>
+            <!-- <friend-contact name="Man Ban" isFavorite="0" phone-number='000 000 1111'
+                email-address="m2@gmail.com"></friend-contact>
             <friend-contact name="Man Can" phone-number='000 000 2222' email-address="m3@gmail.com"></friend-contact>
-            <friend-contact name="Man Dan" phone-number='000 000 3333' email-address="m4@gmail.com"></friend-contact>
+            <friend-contact name="Man Dan" phone-number='000 000 3333' email-address="m4@gmail.com"></friend-contact> -->
         </ul>
     </section>
 </template>
 
 <!-- props should not be mutated. That means data passed from parent to child should only be changed in parent. Because Vue uses unidirectional flow-->
 <!-- you can still toggle fave without passing it as an attribute. -->
+<!-- To use a boolean value in prop attribute you have to bind the prop/attr, otherwise attr usually return strings. So you have to bind to pas a JS value other than a string -->
 <script>
 import FriendContact from './components/FriendContact.vue';
-    //cannot export a const it has to be a default export
-    export default {
-  components: { FriendContact },
-        // this is the config object is meant for the config object in main.js file
-        data () {
-            return {
-                friends: [
-                    {
-                        id: 'manuel',
-                        name: "Man lan",
-                        phone: '000 000 0000',
-                        email: 'm@gmail.com'
-                    },
-                    {
-                        id: 'Sanuel',
-                        name: "San lan",
-                        phone: '000 000 1111',
-                        email: 's@gmail.com'
-                    }
-                ]
-            };
-        }
-    };
+//cannot export a const it has to be a default export
+export default {
+    components: { FriendContact },
+    // this is the config object is meant for the config object in main.js file
+    data() {
+        return {
+            friends: [
+                {
+                    id: 'manuel',
+                    name: "Man lan",
+                    phone: '000 000 0000',
+                    email: 'm@gmail.com'
+                },
+                {
+                    id: 'Sanuel',
+                    name: "San lan",
+                    phone: '000 000 1111',
+                    email: 's@gmail.com'
+                }
+            ]
+        };
+    }
+};
 </script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
-    
-    * {
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+* {
     box-sizing: border-box;
-    }
+}
 
-    html {
+html {
     font-family: 'Jost', sans-serif;
-    }
+}
 
-    body {
+body {
     margin: 0;
-    }
+}
 
-    header {
+header {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     margin: 3rem auto;
     border-radius: 10px;
@@ -67,15 +70,15 @@ import FriendContact from './components/FriendContact.vue';
     text-align: center;
     width: 90%;
     max-width: 40rem;
-    }
+}
 
-    #app ul {
+#app ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    }
+}
 
-    #app li {
+#app li {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     margin: 1rem auto;
     border-radius: 10px;
@@ -83,16 +86,16 @@ import FriendContact from './components/FriendContact.vue';
     text-align: center;
     width: 90%;
     max-width: 40rem;
-    }
+}
 
-    #app h2 {
+#app h2 {
     font-size: 2rem;
     border-bottom: 4px solid #ccc;
     color: #58004d;
     margin: 0 0 1rem 0;
-    }
+}
 
-    #app button {
+#app button {
     font: inherit;
     cursor: pointer;
     border: 1px solid #ff0077;
@@ -100,13 +103,12 @@ import FriendContact from './components/FriendContact.vue';
     color: white;
     padding: 0.05rem 1rem;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
-    }
+}
 
-    #app button:hover,
-    #app button:active {
+#app button:hover,
+#app button:active {
     background-color: #ec3169;
     border-color: #ec3169;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
-    }
-
+}
 </style>
