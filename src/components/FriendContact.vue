@@ -55,6 +55,17 @@
                 default: false
             }
         },
+        emits: {
+            "toggle-favorite": function(id) {
+                //a function that receives the data you would eventually emit as a parameter. Also validate that data that is part of the emit is not forgotten
+                if (id){
+                    return true;
+                } else {
+                    console.warn("Id is missing")
+                    return false;
+                }
+            }
+        },
         data () {
             return {
                 detailsAreVisible: false,
