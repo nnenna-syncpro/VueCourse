@@ -4,11 +4,13 @@ import { createApp } from 'vue';
 import App from "./App.vue";
 //import FriendContact config object, which points at the js object being exported
 import FriendContact from "./components/FriendContact.vue";
+import NewFriend from "./components/NewFriend.vue";
 
 const app = createApp(App);
 
 //call component, provide name and config object for the component
 //this unlocks the FriendContact component in app and the name becomes a custom HTML element that can be used in App.vue
 app.component("friend-contact", FriendContact);
+app.component("new-friend", NewFriend);
 
 app.mount('#app');
